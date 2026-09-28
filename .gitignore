@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+
+# Salidas de compiladores y empaquetadores (PyInstaller, cx_Freeze, etc.)
+build/
+dist/
+*.spec
+
+# Logs y bases de datos temporales
+*.log
+*.sqlite3
+
+# Archivos de configuración de IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de salida de diagramas temporales o de prueba
+output/
+temp/
+*.tmp
