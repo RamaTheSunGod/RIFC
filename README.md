@@ -53,35 +53,36 @@ RIFC uses an intuitive block-based syntax enclosed in parentheses:
 ```text
 start(Start)
 
-loopstart(sample_loop)
-    act(read_tag)(Read analog input)
+    act(label:read)(Read sensor)
     
-    If (Value in range?)(
-        If1 Yes ( act(Process sample) )
-        If2 No ( act(Trigger warning) jmp(read_tag) )
-        If3 Error ( act(Fail-safe state) )
+    If (active sensor?)(
+        If1 Yes ( act(Read) )
+        If2 No ( act(Turn off) jmp(label:read) )
+        If3 Maybe ( act(Failure Mode) )
     )
-loopend(sample_loop)(10 iterations)
 
-io(Export CSV log)
 
-db(Write to database)
-
-doc(Generate PDF summary)
+io(Export data)
+db(Save in database)
+doc(Archive)
 
 end(End)
 ```
+<img width="345" height="605" alt="image" src="https://github.com/user-attachments/assets/507e41b1-7b1d-4d27-a2d4-a8fc18243a27" />
 
-### Installation and Execution
+# Installation and Execution
 ## Option 1: Standalone Binary (Releases)
 Download the latest pre-compiled archive from the Releases section of this repository, extract the archive, and launch RIFC.exe. No Python runtime is required.
 ## Option 2: Running from Source Code
-# Clone the repository
-# Install dependencies
+### Clone the repository
+```git clone [https://github.com/RamaTheSunGod/RIFC.git](https://github.com/RamaTheSunGod/RIFC.git)```
+cd RIFC
+### Install dependencies
+```pip install -r requirements.txt```
 Note: To export to PNG or PDF, install CairoSVG via pip install cairosvg and ensure Cairo shared libraries are installed on your host system.
-# Run the application
+### Run the application
 
-### License and Copyright
+# License and Copyright
 ## Source Code: 
 Distributed under the GNU General Public License v3.0 (GPLv3). Any modifications or derivative software must remain free and licensed under GPLv3.
 
