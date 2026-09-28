@@ -24,6 +24,10 @@ dist/
 *.swp
 *.swo
 
+# Configuración local de usuario generada en tiempo de ejecución
+rifc_presets.json
+rifc_config.json
+
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
