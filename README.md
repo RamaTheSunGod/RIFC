@@ -23,6 +23,7 @@ Unlike alternatives that require heavy Java runtime environments, background hea
 - Real-Time Native Rendering: Instant interactive canvas preview with zoom support (Ctrl + Mouse Wheel) without external layout dependencies.
 - Vector SVG Engine: Generates scalable SVG output with auto-calculated curved paths for loops and long jumps.
 - Multi-format Export: Native export to SVG, with optional compilation to PNG and PDF via CairoSVG.
+- *Export your charts as boilerplate code for python and JavaScript*
 - Expressive Minimalist DSL: Block-based syntax covering processes, conditional branches, loops, and jumps.
 - Syntax-Highlighted Editor: Real-time keyword tagging, bracket detection, and automatic parentheses pairing.
 - Customization Presets: Built-in styles (Classic, Modern, Academic) and a Custom mode with a dedicated palette editor.
