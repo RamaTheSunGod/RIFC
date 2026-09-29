@@ -5,6 +5,11 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/license-GPLv3-green.svg" alt="License">
+</p>
+
+<p align="center">
   <b>Instant, standalone, and lightweight flowchart generator powered by structured pseudo-code.</b>
 </p>
 
