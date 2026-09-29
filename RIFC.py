@@ -136,6 +136,33 @@ I18N = {
         "menu_sel_all": "Seleccionar Todo",
         "menu_help": "Ayuda",
         "menu_commands": "Comandos y Ayuda",
+        "menu_about": "Acerca de RIFC",
+        "menu_export_code": "Exportar a Código...",
+        "about_title": "Acerca de RIFC",
+        "about_text": """=============================================================================
+RIFC (Rama's Instant Flow Chart)
+Copyright (C) 2026 RamaTheSunGod
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Additional Term under GPLv3 Section 7(e):
+Nothing in this license grants permissions to use the trade names, trademarks,
+or service marks of the author ("RIFC", "Rama's Instant Flow Chart"), except
+as required for reasonable and customary use in describing the origin of the
+Software and reproducing the content of the logo ("icon.ico"). The logo asset
+remains the copyright of the author and is provided under CC BY-ND 4.0.
+=============================================================================""",
         "btn_preview": "Actualizar Vista Previa (Ctrl+Enter)",
         "btn_export": "Exportar Diagrama...",
         "pref_title": "Preferencias",
@@ -155,9 +182,9 @@ I18N = {
         "color_dia_stroke": "Decisión Borde",
         "msg_success": "Éxito",
         "msg_saved": "Proyecto guardado.",
-        "msg_compiled": "¡Diagrama compilado con éxito!\nGuardado en: {}",
+        "msg_compiled": "¡Diagrama compilado con éxito!\\nGuardado en: {}",
         "msg_error": "Error",
-        "msg_error_dep": "Para exportar a {} se requiere la librería 'cairosvg'.\nInstálala con: pip install cairosvg",
+        "msg_error_dep": "Para exportar a {} se requiere la librería 'cairosvg'.\\nInstálala con: pip install cairosvg",
         "color_picker_title": "Elegir Color para {}",
         "menu_templates": "Plantillas",
         "tpl_basic": "Básico",
@@ -171,19 +198,19 @@ I18N = {
         "err_no_end": "Falta el nodo 'end(...)' en el diagrama.",
         "err_bad_jmp": "Error de sintaxis: Se intentó hacer un salto (jmp) hacia una etiqueta inexistente: '{}'",
         "help_text": (
-            "Comandos Básicos de RIFC:\n\n"
-            "- start(Texto): Comienza el diagrama (e.g. start(Inicio)).\n"
-            "- end(Texto): Termina el diagrama (e.g. end(Fin)).\n"
-            "- act(etiqueta opcional)(Descripción): Crea una caja de proceso.\n"
-            "- io(Descripción): Crea un paralelogramo (Input/Output).\n"
-            "- db(Descripción): Crea un cilindro (Base de datos).\n"
-            "- doc(Descripción): Crea un documento.\n"
-            "- If (condición)( If1 Si (act...) If2 No (act...) ): Crea decisión.\n"
-            "- loopstart(nombre): Inicia un ciclo.\n"
-            "- loopend(nombre)(condición): Finaliza el ciclo y vuelve al inicio.\n"
-            "- jmp(etiqueta): Salta a un proceso etiquetado.\n\n"
-            "Nota: Se puede usar \\n dentro de los textos para crear múltiples líneas.\n\n"
-            "Atajos:\n"
+            "Comandos Básicos de RIFC:\\n\\n"
+            "- start(Texto): Comienza el diagrama (e.g. start(Inicio)).\\n"
+            "- end(Texto): Termina el diagrama (e.g. end(Fin)).\\n"
+            "- act(etiqueta opcional)(Descripción): Crea una caja de proceso.\\n"
+            "- io(Descripción): Crea un paralelogramo (Input/Output).\\n"
+            "- db(Descripción): Crea un cilindro (Base de datos).\\n"
+            "- doc(Descripción): Crea un documento.\\n"
+            "- If (condición)( If1 Si (act...) If2 No (act...) ): Crea decisión.\\n"
+            "- loopstart(nombre): Inicia un ciclo.\\n"
+            "- loopend(nombre)(condición): Finaliza el ciclo y vuelve al inicio.\\n"
+            "- jmp(etiqueta): Salta a un proceso etiquetado.\\n\\n"
+            "Nota: Se puede usar \\\\n dentro de los textos para crear múltiples líneas.\\n\\n"
+            "Atajos:\\n"
             "- Ctrl+Enter: Actualiza la vista previa."
         )
     },
@@ -201,6 +228,33 @@ I18N = {
         "menu_sel_all": "Select All",
         "menu_help": "Help",
         "menu_commands": "Commands and Help",
+        "menu_about": "About RIFC",
+        "menu_export_code": "Export to Code...",
+        "about_title": "About RIFC",
+        "about_text": """=============================================================================
+RIFC (Rama's Instant Flow Chart)
+Copyright (C) 2026 RamaTheSunGod
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Additional Term under GPLv3 Section 7(e):
+Nothing in this license grants permissions to use the trade names, trademarks,
+or service marks of the author ("RIFC", "Rama's Instant Flow Chart"), except
+as required for reasonable and customary use in describing the origin of the
+Software and reproducing the content of the logo ("icon.ico"). The logo asset
+remains the copyright of the author and is provided under CC BY-ND 4.0.
+=============================================================================""",
         "btn_preview": "Update Preview (Ctrl+Enter)",
         "btn_export": "Export Diagram...",
         "pref_title": "Preferences",
@@ -220,9 +274,9 @@ I18N = {
         "color_dia_stroke": "Decision Stroke",
         "msg_success": "Success",
         "msg_saved": "Project saved.",
-        "msg_compiled": "Diagram compiled successfully!\nSaved in: {}",
+        "msg_compiled": "Diagram compiled successfully!\\nSaved in: {}",
         "msg_error": "Error",
-        "msg_error_dep": "To export to {} the 'cairosvg' library is required.\nInstall it with: pip install cairosvg",
+        "msg_error_dep": "To export to {} the 'cairosvg' library is required.\\nInstall it with: pip install cairosvg",
         "color_picker_title": "Choose Color for {}",
         "menu_templates": "Templates",
         "tpl_basic": "Basic",
@@ -236,19 +290,19 @@ I18N = {
         "err_no_end": "Missing 'end(...)' node in diagram.",
         "err_bad_jmp": "Syntax Error: Attempted a jump (jmp) to a non-existent label: '{}'",
         "help_text": (
-            "RIFC Basic Commands:\n\n"
-            "- start(Text): Starts the diagram (e.g. start(Start)).\n"
-            "- end(Text): Ends the diagram (e.g. end(End)).\n"
-            "- act(optional label)(Description): Creates a process box.\n"
-            "- io(Description): Creates a parallelogram (Input/Output).\n"
-            "- db(Description): Creates a cylinder (Database).\n"
-            "- doc(Description): Creates a document.\n"
-            "- If (condition)( If1 Yes (act...) If2 No (act...) ): Creates a decision.\n"
-            "- loopstart(name): Starts a loop.\n"
-            "- loopend(name)(condition): Ends the loop and goes back to start.\n"
-            "- jmp(label): Jumps to a labeled process.\n\n"
-            "Note: You can use \\n inside texts to create multiple lines.\n\n"
-            "Shortcuts:\n"
+            "RIFC Basic Commands:\\n\\n"
+            "- start(Text): Starts the diagram (e.g. start(Start)).\\n"
+            "- end(Text): Ends the diagram (e.g. end(End)).\\n"
+            "- act(optional label)(Description): Creates a process box.\\n"
+            "- io(Description): Creates a parallelogram (Input/Output).\\n"
+            "- db(Description): Creates a cylinder (Database).\\n"
+            "- doc(Description): Creates a document.\\n"
+            "- If (condition)( If1 Yes (act...) If2 No (act...) ): Creates a decision.\\n"
+            "- loopstart(name): Starts a loop.\\n"
+            "- loopend(name)(condition): Ends the loop and goes back to start.\\n"
+            "- jmp(label): Jumps to a labeled process.\\n\\n"
+            "Note: You can use \\\\n inside texts to create multiple lines.\\n\\n"
+            "Shortcuts:\\n"
             "- Ctrl+Enter: Updates the preview."
         )
     }
@@ -963,8 +1017,6 @@ class NativeFlowCompiler:
                 canvas.create_text(x, y+5, text=node["text"], font=(font, 10), fill=tc, justify=tk.CENTER)
             elif node['type'] == 'merge':
                 canvas.create_oval(x-4, y-4, x+4, y+4, fill=self.config["edge_color"], outline="")
-
-
 # --- Interfaz Gráfica de Escritorio (GUI) ---
 class RIFCApp:
     def __init__(self, root):
@@ -1078,6 +1130,7 @@ class RIFCApp:
         file_menu.add_command(label=t("menu_prefs", self.app_lang), command=self.abrir_preferencias)
         file_menu.add_separator()
         file_menu.add_command(label=t("menu_export", self.app_lang), command=self.exportar_diagrama)
+        file_menu.add_command(label=t("menu_export_code", self.app_lang), command=self.exportar_codigo)
         menubar.add_cascade(label=t("menu_file", self.app_lang), menu=file_menu)
 
         edit_menu = tk.Menu(menubar, tearoff=0)
@@ -1090,6 +1143,7 @@ class RIFCApp:
 
         help_menu = tk.Menu(menubar, tearoff=0)
         help_menu.add_command(label=t("menu_commands", self.app_lang), command=self.mostrar_ayuda)
+        help_menu.add_command(label=t("menu_about", self.app_lang), command=self.mostrar_about)
         menubar.add_cascade(label=t("menu_help", self.app_lang), menu=help_menu)
 
         self.root.config(menu=menubar)
@@ -1197,6 +1251,20 @@ class RIFCApp:
     def mostrar_ayuda(self):
         ayuda_texto = t("help_text", self.app_lang)
         messagebox.showinfo(t("menu_commands", self.app_lang), ayuda_texto)
+        
+    def mostrar_about(self):
+        about_win = tk.Toplevel(self.root)
+        about_win.title(t("about_title", self.app_lang))
+        about_win.geometry("700x550")
+        about_win.transient(self.root)
+        about_win.grab_set()
+        
+        text_widget = tk.Text(about_win, wrap="word", font=("Courier", 10), bg="#f5f5f5")
+        text_widget.pack(expand=True, fill="both", padx=10, pady=10)
+        text_widget.insert("1.0", t("about_text", self.app_lang))
+        text_widget.config(state=tk.DISABLED)
+        
+        ttk.Button(about_win, text="OK", command=about_win.destroy).pack(pady=10)
 
     def load_template(self, tpl_type):
         self.text_editor.delete("1.0", tk.END)
@@ -1372,6 +1440,52 @@ end(Fin)"""
 
         ttk.Button(pref_win, text=t("pref_btn_save", lang), command=save_prefs).pack(pady=20)
 
+    def exportar_codigo(self):
+        codigo = self.text_editor.get("1.0", tk.END)
+        if not codigo.strip():
+            return
+            
+        win = tk.Toplevel(self.root)
+        win.title(t("menu_export_code", self.app_lang))
+        win.geometry("600x500")
+        win.transient(self.root)
+        
+        top_frame = ttk.Frame(win)
+        top_frame.pack(fill="x", padx=10, pady=10)
+        ttk.Label(top_frame, text="Language: ").pack(side="left")
+        lang_combo = ttk.Combobox(top_frame, values=["Python", "JavaScript"], state="readonly")
+        lang_combo.set("Python")
+        lang_combo.pack(side="left", padx=10)
+        
+        text_preview = tk.Text(win, wrap="none", font=("Consolas", 11), bg="#282c34", fg="#abb2bf")
+        text_preview.pack(expand=True, fill="both", padx=10)
+        
+        def update_preview(e=None):
+            try:
+                cg = CodeGenerator(codigo, lang_combo.get())
+                gen = cg.generate()
+                text_preview.delete("1.0", tk.END)
+                text_preview.insert("1.0", gen)
+            except Exception as ex:
+                text_preview.delete("1.0", tk.END)
+                text_preview.insert("1.0", f"Error:\n{ex}")
+                
+        lang_combo.bind("<<ComboboxSelected>>", update_preview)
+        update_preview()
+        
+        def save_code():
+            ext = ".py" if lang_combo.get() == "Python" else ".js"
+            filepath = filedialog.asksaveasfilename(defaultextension=ext, filetypes=[(f"{lang_combo.get()} file", f"*{ext}")])
+            if filepath:
+                with open(filepath, "w", encoding="utf-8") as f:
+                    f.write(text_preview.get("1.0", tk.END))
+                messagebox.showinfo(t("msg_success", self.app_lang), t("msg_saved", self.app_lang))
+                win.destroy()
+                
+        btn_frame = ttk.Frame(win)
+        btn_frame.pack(fill="x", padx=10, pady=10)
+        ttk.Button(btn_frame, text=t("menu_save", self.app_lang), command=save_code).pack(side="right")
+
     def exportar_diagrama(self):
         codigo = self.text_editor.get("1.0", tk.END)
         if not codigo.strip():
@@ -1406,7 +1520,201 @@ end(Fin)"""
             except Exception as e:
                 messagebox.showerror(t("msg_error", self.app_lang), f"{e}")
 
-if __name__ == "__main__":
+import re
+
+class CodeGenerator:
+    def __init__(self, raw_code, language="python"):
+        self.raw_code = raw_code
+        self.language = language.lower()
+        self.functions = set()
+        self.main_flow = []
+
+    def sanitize_func_name(self, text):
+        # Transforma "Mi Función!" a "mi_funcion"
+        text = text.lower()
+        text = re.sub(r'[^a-z0-9_]', '_', text)
+        text = re.sub(r'_+', '_', text)
+        return text.strip('_')
+
+    def tokenize(self, text):
+        pattern = r'(\(|\)|[^\s\(\)]+)'
+        return [t for t in re.findall(pattern, text)]
+
+    def extract_block(self, tokens, index):
+        if index >= len(tokens) or tokens[index] != '(':
+            return [], index
+        depth = 1
+        start = index + 1
+        i = start
+        while i < len(tokens) and depth > 0:
+            if tokens[i] == '(': depth += 1
+            elif tokens[i] == ')': depth -= 1
+            i += 1
+        block_tokens = [tok.replace("\\n", "\n") for tok in tokens[start:i-1]]
+        return block_tokens, i
+
+    def generate(self):
+        tokens = self.tokenize(self.raw_code)
+        self.main_flow = self.parse_sequence(tokens, indent_level=1 if self.language == "python" else 1)
+        return self.assemble_code()
+
+    def parse_sequence(self, tokens, indent_level=0):
+        flow = []
+        i = 0
+        indent = "    " * indent_level
+
+        while i < len(tokens):
+            tok = tokens[i]
+
+            if tok.lower() in ("start", "end"):
+                _, i = self.extract_block(tokens, i + 1)
+
+            elif tok.lower() in ("act", "io", "db", "doc"):
+                block1, next_i = self.extract_block(tokens, i + 1)
+                i = next_i
+                if i < len(tokens) and tokens[i] == '(':
+                    block2, next_i2 = self.extract_block(tokens, i)
+                    label_name = " ".join(block1)
+                    action_text = " ".join(block2)
+                    i = next_i2
+                else:
+                    action_text = " ".join(block1)
+
+                func_name = self.sanitize_func_name(action_text)
+                if not func_name: func_name = "do_action"
+                self.functions.add((func_name, action_text))
+                
+                if self.language == "python":
+                    flow.append(f"{indent}{func_name}()")
+                elif self.language == "javascript":
+                    flow.append(f"{indent}{func_name}();")
+
+            elif tok.lower() == "loopstart":
+                block, i = self.extract_block(tokens, i + 1)
+                loop_name = " ".join(block)
+                if self.language == "python":
+                    flow.append(f"{indent}while True: # TODO: Definir condición para {loop_name}")
+                elif self.language == "javascript":
+                    flow.append(f"{indent}while (true) {{ // TODO: Definir condición para {loop_name}")
+
+                # Increase indent for the body
+                indent_level += 1
+                indent = "    " * indent_level
+
+            elif tok.lower() == "loopend":
+                block1, i = self.extract_block(tokens, i + 1)
+                if i < len(tokens) and tokens[i] == '(':
+                    _, i = self.extract_block(tokens, i)
+                
+                # Decrease indent
+                indent_level -= 1
+                indent = "    " * indent_level
+                if self.language == "javascript":
+                    flow.append(f"{indent}}}")
+
+            elif tok.lower() == "if":
+                cond_block, i = self.extract_block(tokens, i + 1)
+                cond_text = " ".join(cond_block)
+
+                branches_block, i = self.extract_block(tokens, i)
+                branches_code = self.parse_if_branches(branches_block, cond_text, indent_level)
+                flow.extend(branches_code)
+
+            elif tok.lower() == "jmp":
+                block, i = self.extract_block(tokens, i + 1)
+                target_label = " ".join(block)
+                if self.language == "python":
+                    flow.append(f"{indent}# TODO: jmp a {target_label} (Reestructurar con funciones o bucles)")
+                else:
+                    flow.append(f"{indent}// TODO: jmp a {target_label} (Reestructurar con funciones o bucles)")
+
+            else:
+                i += 1
+
+        return flow
+
+    def parse_if_branches(self, tokens, cond_text, indent_level):
+        flow = []
+        indent = "    " * indent_level
+        inner_indent = "    " * (indent_level + 1)
+        
+        i = 0
+        branch_count = 0
+        
+        if self.language == "python":
+            flow.append(f"{indent}# TODO: Evaluar condición -> {cond_text}")
+        elif self.language == "javascript":
+            flow.append(f"{indent}// TODO: Evaluar condición -> {cond_text}")
+
+        while i < len(tokens):
+            tok = tokens[i]
+            if re.match(r'If\d+', tok, re.IGNORECASE):
+                branch_label_words = []
+                i += 1
+                while i < len(tokens) and tokens[i] != '(':
+                    branch_label_words.append(tokens[i])
+                    i += 1
+                branch_label = " ".join(branch_label_words)
+                branch_actions, i = self.extract_block(tokens, i)
+
+                if self.language == "python":
+                    kw = "if" if branch_count == 0 else "elif"
+                    flow.append(f"{indent}{kw} condition == '{branch_label}':")
+                elif self.language == "javascript":
+                    kw = "if" if branch_count == 0 else "else if"
+                    flow.append(f"{indent}{kw} (condition === '{branch_label}') {{")
+
+                # Parse inner branch actions
+                inner_flow = self.parse_sequence(branch_actions, indent_level + 1)
+                if not inner_flow and self.language == "python":
+                    inner_flow = [f"{inner_indent}pass"]
+                    
+                flow.extend(inner_flow)
+                
+                if self.language == "javascript":
+                    flow.append(f"{indent}}}")
+                
+                branch_count += 1
+            else:
+                i += 1
+
+        return flow
+
+    def assemble_code(self):
+        lines = []
+        
+        if self.language == "python":
+            for func_name, doc in self.functions:
+                lines.append(f"def {func_name}():")
+                doc_clean = doc.replace('\n', ' ')
+                lines.append(f'    """ {doc_clean} """')
+                lines.append(f"    pass\n")
+            
+            lines.append("def main():")
+            if not self.main_flow:
+                lines.append("    pass")
+            else:
+                lines.extend(self.main_flow)
+                
+            lines.append("\nif __name__ == '__main__':")
+            lines.append("    main()")
+
+        elif self.language == "javascript":
+            for func_name, doc in self.functions:
+                doc_clean = doc.replace('\n', ' ')
+                lines.append(f"// {doc_clean}")
+                lines.append(f"function {func_name}() {{")
+                lines.append(f"    // TODO: Implementar")
+                lines.append(f"}}\n")
+            
+            lines.append("function main() {")
+            lines.extend(self.main_flow)
+            lines.append("}\n")
+            lines.append("main();")
+
+        return "\n".join(lines)
+
+if __name__ == '__main__':
     root = tk.Tk()
     app = RIFCApp(root)
     root.mainloop()
