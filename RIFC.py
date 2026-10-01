@@ -490,7 +490,12 @@ class NativeFlowCompiler:
                 block, next_i = self.extract_block(tokens, i + 1)
                 i = next_i
                 target_label = " ".join(block)
-                if current_source: self.pending_jmps.append((current_source, target_label))
+                if current_source:
+                    if isinstance(current_source, list):
+                        for src in current_source:
+                            self.pending_jmps.append((src, target_label))
+                    else:
+                        self.pending_jmps.append((current_source, target_label))
                 current_source = None
 
             elif tok.lower() == "if":
