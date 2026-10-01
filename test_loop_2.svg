@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1040" viewBox="0 0 600 1040">
+<style>
+  text { font-family: Helvetica, Arial, sans-serif; font-size: 12px; text-anchor: middle; dominant-baseline: middle; fill: #333333; }
+  .text-label { paint-order: stroke; stroke: #ffffff; stroke-width: 4px; stroke-linecap: butt; stroke-linejoin: miter; }
+  .box { stroke: #2c3e50; stroke-width: 2; rx: 8; ry: 8; }
+  .oval-inicio { stroke: #27ae60; stroke-width: 2; rx: 20; ry: 20; }
+  .oval-fin { stroke: #27ae60; stroke-width: 2; rx: 20; ry: 20; }
+  .diamond { stroke: #f39c12; stroke-width: 2; }
+  .edge { stroke: #7f8c8d; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+  .edge-dashed { stroke: #7f8c8d; stroke-width: 2; stroke-dasharray: 5,5; fill: none; marker-end: url(#arrow); }
+  .edge-no-arrow { stroke: #7f8c8d; stroke-width: 2; fill: none; }
+</style>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M 0 2 L 10 5 L 0 8 z" fill="#7f8c8d"/>
+  </marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<line x1="300" y1="75" x2="300" y2="145" class="edge"/>
+<line x1="300" y1="195" x2="300" y2="265" class="edge"/>
+<line x1="300" y1="315" x2="300" y2="385" class="edge"/>
+<line x1="300" y1="435" x2="210.0" y2="505" class="edge"/>
+<text x="255.0" y="470.0" class="text-label" font-weight="bold">Si</text>
+<line x1="300" y1="435" x2="390.0" y2="505" class="edge"/>
+<text x="345.0" y="470.0" class="text-label" font-weight="bold">No</text>
+<line x1="210.0" y1="555" x2="300" y2="646" class="edge-no-arrow"/>
+<line x1="390.0" y1="555" x2="300" y2="646" class="edge-no-arrow"/>
+<path d="M 340 650 C 540.0 650, 540.0 230, 300 250" class="edge" fill="none"/>
+<text x="510.0" y="470.0" class="text-label" font-weight="bold">volver</text>
+<line x1="300" y1="654" x2="300" y2="745" class="edge"/>
+<line x1="300" y1="795" x2="300" y2="865" class="edge"/>
+<path d="M 340 50 C 458.0 50, 458.0 -10, 300 10" class="edge" fill="none"/>
+<path d="M 340 50 C 458.0 50, 458.0 -10, 300 10" class="edge" fill="none"/>
+<path d="M 340 50 C 458.0 50, 458.0 -10, 300 10" class="edge" fill="none"/>
+<text x="428.0" y="50.0" class="text-label" font-weight="bold">Si</text>
+<path d="M 340 50 C 458.0 50, 458.0 -10, 300 10" class="edge" fill="none"/>
+<text x="428.0" y="50.0" class="text-label" font-weight="bold">No</text>
+<path d="M 340 50 C 458.0 50, 458.0 -10, 300 31" class="edge-no-arrow" fill="none"/>
+<path d="M 340 50 C 488.0 50, 488.0 -10, 300 31" class="edge-no-arrow" fill="none"/>
+<path d="M 340 50 C 488.0 50, 488.0 -10, 300 10" class="edge" fill="none"/>
+<text x="458.0" y="50.0" class="text-label" font-weight="bold">volver</text>
+<path d="M 340 50 C 458.0 50, 458.0 -10, 300 10" class="edge" fill="none"/>
+<rect x="240.0" y="30" width="120" height="40" rx="20" ry="20" class="oval-inicio" fill="#A8E6CF"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="bold">Inicio</tspan></text>
+<rect x="240.0" y="145" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="170"><tspan x="300" y="170.0" font-weight="normal">Paso 1</tspan></text>
+<rect x="232.0" y="265" width="136" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="290"><tspan x="300" y="290.0" font-weight="normal">Dentro del loop 1</tspan></text>
+<polygon points="300,380 380.0,410 300,440 220.0,410" class="diamond" fill="#FFF3B0"/>
+<text x="300" y="410"><tspan x="300" y="410.0" font-weight="normal">Cond?</tspan></text>
+<rect x="150.0" y="505" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="210.0" y="530"><tspan x="210.0" y="530.0" font-weight="normal">A</tspan></text>
+<rect x="330.0" y="505" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="390.0" y="530"><tspan x="390.0" y="530.0" font-weight="normal">B</tspan></text>
+<circle cx="300" cy="650" r="4" fill="#7f8c8d" />
+<rect x="240.0" y="745" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="770"><tspan x="300" y="770.0" font-weight="normal">Fin loop</tspan></text>
+<rect x="240.0" y="870" width="120" height="40" rx="20" ry="20" class="oval-fin" fill="#FF8B94"/>
+<text x="300" y="890"><tspan x="300" y="890.0" font-weight="bold">Fin</tspan></text>
+<rect x="240.0" y="25" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="normal">Paso 1</tspan></text>
+<rect x="232.0" y="25" width="136" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="normal">Dentro del loop 1</tspan></text>
+<polygon points="300,20 380.0,50 300,80 220.0,50" class="diamond" fill="#FFF3B0"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="normal">Cond?</tspan></text>
+<rect x="240.0" y="25" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="normal">A</tspan></text>
+<rect x="240.0" y="25" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="normal">B</tspan></text>
+<circle cx="300" cy="50" r="4" fill="#7f8c8d" />
+<rect x="240.0" y="25" width="120" height="50" class="box" fill="#D1EAED"/>
+<text x="300" y="50"><tspan x="300" y="50.0" font-weight="normal">Fin loop</tspan></text>
+</svg>
