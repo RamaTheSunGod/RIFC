@@ -369,8 +369,11 @@ class NativeFlowCompiler:
         
         if not self.has_inicio:
             raise ValueError(t("err_no_start", self.lang))
-        if not self.has_fin:
-            raise ValueError(t("err_no_end", self.lang))
+        # Note: We now allow missing end for disjoint components, but let's just keep the validation soft
+        # or remove it if substart is present. Let's remove has_fin enforcement to allow simple diagrams.
+        # Actually, let's just remove has_inicio and has_fin strictness if nodes exist.
+        if len(self.nodes) == 0:
+            raise ValueError(t("err_no_start", self.lang))
         
         # Resolver jmps
         for src, target_label, *opt_lbl in self.pending_jmps:
@@ -385,34 +388,37 @@ class NativeFlowCompiler:
         while i < len(tokens):
             tok = tokens[i]
 
-            if tok.lower() == "start":
+            if tok.lower() in ("start", "substart"):
                 block, next_i = self.extract_block(tokens, i + 1)
                 start_text = " ".join(block) if block else "Start"
                 i = next_i
                 
-                if not self.has_inicio:
-                    nid = f"n_{len(self.nodes)}"
-                    self.nodes.append({'id': nid, 'type': 'oval', 'text': start_text, 'fill': self.config['inicio_fill'], 'stroke': self.config['inicio_stroke']})
-                    if current_source: self.edges.append({'from': current_source, 'to': nid, 'label': '', 'dashed': False})
-                    current_source = nid
-                    self.has_inicio = True
+                nid = f"n_{len(self.nodes)}"
+                self.nodes.append({'id': nid, 'type': 'oval', 'text': start_text, 'fill': self.config['inicio_fill'], 'stroke': self.config['inicio_stroke']})
+                if current_source: self.edges.append({'from': current_source, 'to': nid, 'label': '', 'dashed': False})
+                # Substart acts as a root for a new diagram, so we shouldn't connect the previous source to it
+                if tok.lower() == "substart" and current_source:
+                    # Remove the edge we just added, substart starts a disjoint graph
+                    self.edges.pop()
+                current_source = nid
+                self.has_inicio = True
 
-            elif tok.lower() == "end":
+            elif tok.lower() in ("end", "subend"):
                 block, next_i = self.extract_block(tokens, i + 1)
                 end_text = " ".join(block) if block else "End"
                 i = next_i
                 
-                if not self.has_fin:
-                    nid = f"n_{len(self.nodes)}"
-                    self.nodes.append({'id': nid, 'type': 'oval', 'text': end_text, 'fill': self.config['fin_fill'], 'stroke': self.config['fin_stroke']})
-                    if current_source:
-                        if isinstance(current_source, list):
-                            for src in current_source:
-                                self.edges.append({'from': src, 'to': nid, 'label': '', 'dashed': False})
-                        else:
-                            self.edges.append({'from': current_source, 'to': nid, 'label': '', 'dashed': False})
-                    current_source = nid
-                    self.has_fin = True
+                nid = f"n_{len(self.nodes)}"
+                self.nodes.append({'id': nid, 'type': 'oval', 'text': end_text, 'fill': self.config['fin_fill'], 'stroke': self.config['fin_stroke']})
+                if current_source:
+                    if isinstance(current_source, list):
+                        for src in current_source:
+                            self.edges.append({'from': src, 'to': nid, 'label': '', 'dashed': False})
+                    else:
+                        self.edges.append({'from': current_source, 'to': nid, 'label': '', 'dashed': False})
+                # End or subend terminates the flow
+                current_source = None
+                self.has_fin = True
 
             elif tok.lower() == "loopstart":
                 block, next_i = self.extract_block(tokens, i + 1)
@@ -459,7 +465,7 @@ class NativeFlowCompiler:
                         # Since target_node is now the merge node created exactly at loopstart, we can point directly to it
                         self.edges.append({'from': merge_nid, 'to': target_node, 'label': return_label, 'dashed': True})
 
-            elif tok.lower() in ("act", "io", "db", "doc"):
+            elif tok.lower() in ("act", "io", "db", "doc", "sub"):
                 node_cmd = tok.lower()
                 block1, next_i = self.extract_block(tokens, i + 1)
                 i = next_i
@@ -477,6 +483,7 @@ class NativeFlowCompiler:
                 if node_cmd == 'io': shape_type = 'parallelogram'
                 elif node_cmd == 'db': shape_type = 'cylinder'
                 elif node_cmd == 'doc': shape_type = 'document'
+                elif node_cmd == 'sub': shape_type = 'subroutine'
                 
                 self.nodes.append({'id': nid, 'type': shape_type, 'text': action_text, 'fill': self.config['box_fill'], 'stroke': self.config['box_stroke']})
                 if label_name: self.labels[label_name] = nid
@@ -610,11 +617,13 @@ class NativeFlowCompiler:
             if dst in incoming: incoming[dst].append(src)
 
         # Topological sorting to identify forward edges and levels
-        # Assuming n_0 is Inicio
         levels = {node['id']: 0 for node in self.nodes}
         if self.nodes:
-            start_node = self.nodes[0]['id']
-            queue = [start_node]
+            # Enqueue all nodes with no incoming edges (roots)
+            queue = [node['id'] for node in self.nodes if not incoming.get(node['id'])]
+            # Fallback if there are cycles but no strict roots
+            if not queue: queue = [self.nodes[0]['id']]
+
             visited = set()
             while queue:
                 curr = queue.pop(0)
@@ -675,8 +684,12 @@ class NativeFlowCompiler:
         # Assign X coordinates by spreading branches based on their required widths
         queue = []
         if self.nodes:
-            start_node = self.nodes[0]['id']
-            queue.append((start_node, center_x))
+            roots = [node['id'] for node in self.nodes if not incoming.get(node['id'])]
+            if not roots: roots = [self.nodes[0]['id']]
+
+            # Spread disconnected roots horizontally
+            for idx, root in enumerate(roots):
+                queue.append((root, center_x + (idx * 300)))
             
         visited = set()
         
@@ -850,6 +863,11 @@ class NativeFlowCompiler:
             if node['type'] == 'box':
                 svg_lines.append(f'<rect x="{x-hw}" y="{y-25}" width="{base_width}" height="50" class="box" fill="{fill}"/>')
                 svg_lines.append(create_multiline_svg_text(x, y, node["text"]))
+            elif node['type'] == 'subroutine':
+                svg_lines.append(f'<rect x="{x-hw}" y="{y-25}" width="{base_width}" height="50" class="box" fill="{fill}"/>')
+                svg_lines.append(f'<line x1="{x-hw+10}" y1="{y-25}" x2="{x-hw+10}" y2="{y+25}" stroke="{self.config["box_stroke"]}" stroke-width="2"/>')
+                svg_lines.append(f'<line x1="{x+hw-10}" y1="{y-25}" x2="{x+hw-10}" y2="{y+25}" stroke="{self.config["box_stroke"]}" stroke-width="2"/>')
+                svg_lines.append(create_multiline_svg_text(x, y, node["text"]))
             elif node['type'] == 'oval':
                 cls = "oval-inicio" if node["text"].lower() == "inicio" else "oval-fin"
                 svg_lines.append(f'<rect x="{x-hw}" y="{y-20}" width="{base_width}" height="40" rx="20" ry="20" class="{cls}" fill="{fill}"/>')
@@ -995,6 +1013,11 @@ class NativeFlowCompiler:
 
             if node['type'] == 'box':
                 canvas.create_rectangle(x-hw, y-25, x+hw, y+25, fill=fill, outline=self.config["box_stroke"], width=2)
+                canvas.create_text(x, y, text=node["text"], font=(font, 10), fill=tc, justify=tk.CENTER)
+            elif node['type'] == 'subroutine':
+                canvas.create_rectangle(x-hw, y-25, x+hw, y+25, fill=fill, outline=self.config["box_stroke"], width=2)
+                canvas.create_line(x-hw+10, y-25, x-hw+10, y+25, fill=self.config["box_stroke"], width=2)
+                canvas.create_line(x+hw-10, y-25, x+hw-10, y+25, fill=self.config["box_stroke"], width=2)
                 canvas.create_text(x, y, text=node["text"], font=(font, 10), fill=tc, justify=tk.CENTER)
             elif node['type'] == 'oval':
                 stroke = self.config["inicio_stroke"] if node["text"].lower() == "inicio" else self.config["fin_stroke"]
@@ -1193,7 +1216,7 @@ class RIFCApp:
             start_idx = end_idx
 
         # Highlight keywords
-        keywords = r'\b(start|end|act|io|db|doc|If|loopstart|loopend|jmp|Si|No)\b'
+        keywords = r'\b(start|end|act|io|db|doc|sub|substart|subend|If|loopstart|loopend|jmp|Si|No)\b'
         start_idx = "1.0"
         while True:
             start_idx = self.text_editor.search(keywords, start_idx, tk.END, regexp=True, nocase=True)
