@@ -418,6 +418,17 @@ class NativeFlowCompiler:
                 block, next_i = self.extract_block(tokens, i + 1)
                 i = next_i
                 loop_name = " ".join(block)
+
+                # Inject a merge node to serve as a definite target for the loop to return to
+                merge_nid = f"n_{len(self.nodes)}"
+                self.nodes.append({'id': merge_nid, 'type': 'merge', 'text': '', 'fill': 'none', 'stroke': 'none'})
+                if current_source:
+                    if isinstance(current_source, list):
+                        for src in current_source:
+                            self.edges.append({'from': src, 'to': merge_nid, 'label': '', 'dashed': False})
+                    else:
+                        self.edges.append({'from': current_source, 'to': merge_nid, 'label': '', 'dashed': False})
+                current_source = merge_nid
                 self.loop_starts[loop_name] = current_source
 
             elif tok.lower() == "loopend":
@@ -443,19 +454,10 @@ class NativeFlowCompiler:
                         
                     current_source = merge_nid
                     
-                    start_node = self.loop_starts[loop_name]
-                    if start_node is not None:
-                        # Find out what start_node points to! Because start_node is the node BEFORE loopstart
-                        target_node = start_node
-                        for e in self.edges:
-                            if e['from'] == start_node:
-                                target_node = e['to']
-                                break
-                                
-                        # This backward edge must be dashed so the topological sort ignores it.
+                    target_node = self.loop_starts[loop_name]
+                    if target_node is not None:
+                        # Since target_node is now the merge node created exactly at loopstart, we can point directly to it
                         self.edges.append({'from': merge_nid, 'to': target_node, 'label': return_label, 'dashed': True})
-                    # We no longer set current_source = None.
-                    # The flow continues downward for elements OUTSIDE the loop (loop exit path).
 
             elif tok.lower() in ("act", "io", "db", "doc"):
                 node_cmd = tok.lower()
@@ -501,9 +503,30 @@ class NativeFlowCompiler:
             elif tok.lower() == "if":
                 cond_block, next_i = self.extract_block(tokens, i + 1)
                 i = next_i
-                cond_text = " ".join(cond_block)
                 
+                # Check if next block is a second parenthesis, meaning the first was a label
+                if i < len(tokens) and tokens[i] == '(':
+                    branches_block_or_cond, next_i2 = self.extract_block(tokens, i)
+                    # If there's a third parenthesis, we have: If (label)(cond)(branches)
+                    if next_i2 < len(tokens) and tokens[next_i2] == '(':
+                        branches_block_final, next_i3 = self.extract_block(tokens, next_i2)
+                        label_name = " ".join(cond_block)
+                        cond_text = " ".join(branches_block_or_cond)
+                        branches_block = branches_block_final
+                        i = next_i3
+                    else:
+                        label_name = None
+                        cond_text = " ".join(cond_block)
+                        branches_block = branches_block_or_cond
+                        i = next_i2
+                else:
+                    label_name = None
+                    cond_text = " ".join(cond_block)
+                    branches_block = [] # Error case really
+
                 nid = f"n_{len(self.nodes)}"
+                if label_name:
+                    self.labels[label_name] = nid
                 self.nodes.append({'id': nid, 'type': 'diamond', 'text': cond_text, 'fill': self.config['diamond_fill'], 'stroke': self.config['diamond_stroke']})
                 if current_source:
                     if isinstance(current_source, list):
@@ -512,8 +535,7 @@ class NativeFlowCompiler:
                     else:
                         self.edges.append({'from': current_source, 'to': nid, 'label': '', 'dashed': False})
 
-                branches_block, next_i2 = self.extract_block(tokens, i)
-                i = next_i2
+                # We already extracted branches_block above in the new if parsing logic.
                 branch_ends = self.parse_if_branches(branches_block, nid)
                 current_source = branch_ends
             else:
